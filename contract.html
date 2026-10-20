@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Content Aviator · Vendor Contract Assessment Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-950:#030b2a;
+    --navy-900:#001889;
+    --blue-600:#0057d8;
+    --blue-500:#0075fc;
+    --ink:#0b1130;
+    --slate-600:#4b5468;
+    --slate-400:#8890a3;
+    --slate-200:#dbe0ec;
+    --bg:#f4f6fb;
+    --panel:#fff;
+    --green:#1c8a4c;
+    --green-bg:#e7f5ec;
+    --amber:#b3790c;
+    --amber-bg:#fbf1de;
+    --red:#c23b30;
+    --red-bg:#fbe9e7;
+    --radius:10px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;font-family:'IBM Plex Sans',sans-serif;color:var(--ink);background:var(--bg);line-height:1.55;}
+  a{color:inherit;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 32px;}
+  h1,h2,h3,h4{margin:0;font-weight:600;letter-spacing:-.01em;}
+  p{margin:0;}
+  .nav{position:sticky;top:0;z-index:50;background:rgba(3,11,42,.92);backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,.08);}
+  .nav .wrap{display:flex;align-items:center;justify-content:space-between;min-height:60px;gap:12px;}
+  .brand{display:flex;align-items:center;gap:10px;color:#fff;font-weight:600;font-size:15px;}
+  .brand .dot{width:9px;height:9px;border-radius:50%;background:var(--blue-500);box-shadow:0 0 0 4px rgba(0,117,252,.25);}
+  .brand small{display:block;font-weight:400;color:var(--slate-400);font-size:11px;margin-top:1px;}
+  .navlinks{display:flex;gap:24px;font-size:13px;}
+  .navlinks a{color:#c9cee0;text-decoration:none;}
+  .navlinks a:hover{color:#fff;}
+  .hero{background:radial-gradient(1100px 500px at 78% -10%,#0a1f6b 0%,var(--navy-950) 55%),var(--navy-950);color:#fff;padding:72px 0 54px;}
+  .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;}
+  .eyebrow-line{display:flex;align-items:center;gap:10px;color:var(--blue-500);font-size:13px;margin-bottom:18px;}
+  .eyebrow-line .rule{width:28px;height:1px;background:var(--blue-500);}
+  .hero h1{font-size:42px;line-height:1.14;max-width:600px;}
+  .hero h1 span{color:var(--blue-500);}
+  .hero p.sub{margin-top:18px;max-width:540px;color:#b9c0da;font-size:16px;}
+  .hero-stats{display:flex;gap:26px;margin-top:30px;flex-wrap:wrap;}
+  .hero-stats div{border-left:2px solid rgba(255,255,255,.15);padding-left:12px;}
+  .hero-stats .num{font-family:'IBM Plex Mono',monospace;font-size:20px;font-weight:600;}
+  .hero-stats .lbl{font-size:11px;color:#9aa2c0;margin-top:2px;}
+  .summary-panel{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.13);border-radius:var(--radius);padding:22px;}
+  .summary-panel .cap{font-size:12px;color:#93a0cc;margin-bottom:14px;}
+  .summary-panel h2{font-size:19px;color:#fff;margin-bottom:8px;}
+  .summary-panel p{font-size:13px;color:#b9c0da;}
+  .summary-list{display:grid;gap:10px;margin-top:18px;}
+  .summary-row{display:flex;justify-content:space-between;gap:16px;border-top:1px solid rgba(255,255,255,.12);padding-top:9px;font-size:12px;}
+  .summary-row span:first-child{color:#93a0cc;}
+  .summary-row span:last-child{text-align:right;color:#e2e7f7;}
+  section{padding:62px 0;}
+  section.alt{background:var(--panel);border-top:1px solid var(--slate-200);border-bottom:1px solid var(--slate-200);}
+  .section-head{max-width:700px;margin-bottom:32px;}
+  .kicker{font-size:12.5px;color:var(--blue-600);font-weight:600;margin-bottom:8px;}
+  .section-head h2{font-size:28px;}
+  .section-head p{margin-top:12px;color:var(--slate-600);font-size:15.5px;}
+  .scenario-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  .card{background:var(--panel);border:1px solid var(--slate-200);border-radius:var(--radius);padding:22px;}
+  .alt .card{background:#fff;}
+  .card .tag{display:inline-block;font-size:11px;font-family:'IBM Plex Mono',monospace;color:var(--blue-600);background:#eaf2ff;padding:3px 8px;border-radius:5px;margin-bottom:12px;}
+  .card h3{font-size:18px;}
+  .card p{margin-top:8px;color:var(--slate-600);font-size:14px;}
+  .card ul{margin:12px 0 0;padding-left:19px;color:var(--slate-600);font-size:13.5px;}
+  .card li{margin-bottom:5px;}
+  .doc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  .doc-card{background:#fff;border:1px solid var(--slate-200);border-radius:var(--radius);padding:20px;}
+  .doc-card h3{font-size:16px;}
+  .doc-card p{margin-top:8px;color:var(--slate-600);font-size:13.5px;}
+  .doc-card .fields{display:flex;flex-wrap:wrap;gap:6px;margin-top:13px;}
+  .fields span,.source{font-family:'IBM Plex Mono',monospace;font-size:10.5px;background:var(--bg);border:1px solid var(--slate-200);color:var(--slate-600);padding:3px 7px;border-radius:5px;}
+  .table-wrap{overflow-x:auto;background:#fff;border:1px solid var(--slate-200);border-radius:var(--radius);}
+  table{width:100%;border-collapse:collapse;font-size:13px;min-width:760px;}
+  th,td{text-align:left;vertical-align:top;padding:13px 14px;border-bottom:1px solid var(--slate-200);}
+  th{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--slate-600);background:#f8f9fc;}
+  tr:last-child td{border-bottom:0;}
+  td{color:var(--slate-600);}
+  td strong{color:var(--ink);}
+  .chip{display:inline-block;font-size:10.5px;font-weight:600;padding:3px 9px;border-radius:20px;white-space:nowrap;}
+  .chip.green{background:var(--green-bg);color:var(--green);}
+  .chip.yellow{background:var(--amber-bg);color:var(--amber);}
+  .chip.red{background:var(--red-bg);color:var(--red);}
+  .timeline{position:relative;margin-top:8px;padding-left:28px;border-left:2px solid var(--slate-200);}
+  .t-item{position:relative;padding-bottom:22px;}
+  .t-item:last-child{padding-bottom:0;}
+  .t-dot{position:absolute;left:-35px;top:3px;width:14px;height:14px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 2px currentColor;}
+  .t-dot.green{color:var(--green);background:var(--green);}
+  .t-dot.yellow{color:var(--amber);background:var(--amber);}
+  .t-dot.red{color:var(--red);background:var(--red);}
+  .t-card{background:#fff;border:1px solid var(--slate-200);border-radius:var(--radius);padding:16px 18px;}
+  .t-card summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;font-weight:600;font-size:14px;}
+  .t-card summary::-webkit-details-marker{display:none;}
+  .t-card summary .date{font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:11px;color:var(--slate-400);min-width:92px;}
+  .t-card summary .title{flex:1;}
+  .t-card summary .arrow{color:var(--slate-400);}
+  .t-card .body{margin-top:12px;padding-top:12px;border-top:1px solid var(--slate-200);color:var(--slate-600);font-size:13.5px;}
+  .t-card .source{display:inline-block;margin-top:10px;color:var(--blue-600);background:#eaf2ff;border:0;}
+  .callout{margin-top:20px;background:#fff8ec;border:1px solid #f0d9a8;border-radius:var(--radius);padding:16px 18px;font-size:13.5px;color:#6b5006;}
+  .callout b{color:#4d3900;}
+  .chat-shell{background:var(--navy-950);border-radius:14px;padding:22px;color:#fff;}
+  .chat-top{display:flex;align-items:center;gap:8px;margin-bottom:18px;font-size:12px;color:#8f9ac2;}
+  .chat-top .dot{width:8px;height:8px;border-radius:50%;background:var(--blue-500);}
+  .msg{max-width:82%;margin-bottom:15px;font-size:13.5px;}
+  .msg.user{margin-left:auto;text-align:right;}
+  .msg.user .bubble{background:var(--blue-600);color:#fff;border-radius:12px 12px 3px 12px;padding:10px 14px;display:inline-block;text-align:left;}
+  .msg.bot .bubble{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:3px 12px 12px 12px;padding:12px 15px;color:#dfe3f3;}
+  .cites{margin-top:9px;display:flex;gap:6px;flex-wrap:wrap;}
+  .cites span{font-family:'IBM Plex Mono',monospace;font-size:10px;background:rgba(0,117,252,.16);color:#8fc2ff;padding:3px 8px;border-radius:5px;border:1px solid rgba(0,117,252,.35);}
+  .cap-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+  .cap-card{padding:20px 0 0;border-top:2px solid var(--navy-900);}
+  .cap-card h3{font-size:15px;margin-bottom:8px;}
+  .cap-card p{font-size:13px;color:var(--slate-600);}
+  footer{background:var(--navy-950);color:#93a0cc;padding:30px 0;font-size:12.5px;}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+  footer strong{color:#fff;}
+  @media(max-width:900px){.hero .wrap{grid-template-columns:1fr;gap:32px;}.doc-grid{grid-template-columns:1fr;}.cap-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:760px){.navlinks{display:none;}.scenario-grid{grid-template-columns:1fr;}.wrap{padding:0 20px;}.hero{padding:50px 0 40px;}.hero h1{font-size:32px;}section{padding:48px 0;}.section-head h2{font-size:24px;}.summary-row{font-size:11px;}}
+  @media(max-width:560px){.cap-grid{grid-template-columns:1fr;}.hero-stats{gap:16px;}.t-card summary{align-items:flex-start;}.t-card summary .date{min-width:80px;}.msg{max-width:94%;}}
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html" style="text-decoration:none;"><span class="dot"></span><div>OpenText™<small>Vendor contract assessment — demo scenario</small></div></a>
+    <div class="navlinks">
+      <a href="index.html">Home</a>
+      <a href="#scenario">Scenario</a>
+      <a href="#documents">Documents</a>
+      <a href="#assessment">Assessment</a>
+      <a href="#ask">Ask Aviator</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow-line"><span class="rule"></span>Demo scenario</div>
+      <h1>A new vendor price list arrives. <span>What changed in the deal?</span></h1>
+      <p class="sub">Follow a sample buyer-side review for Innovate, a computer equipment wholesaler. When a vendor agreement and product schedule land in OpenText Core Content Management, Content Aviator compares the package with internal guidelines, checks reference pricing, and prepares findings for human reviewers.</p>
+      <div class="hero-stats">
+        <div><div class="num">05</div><div class="lbl">sample source documents</div></div>
+        <div><div class="num">17</div><div class="lbl">review areas</div></div>
+        <div><div class="num">03</div><div class="lbl">sample findings</div></div>
+        <div><div class="num">0</div><div class="lbl">automated approvals</div></div>
+      </div>
+    </div>
+    <aside class="summary-panel" aria-label="Illustrative review summary">
+      <div class="cap mono">ILLUSTRATIVE REVIEW · NOT A REAL CONTRACT</div>
+      <h2>Buyer-side assessment</h2>
+      <p>Demo-only supplier, terms, item codes, and prices show how evidence and recommendations stay separate.</p>
+      <div class="summary-list">
+        <div class="summary-row"><span>Business</span><span>Innovate · wholesale distribution</span></div>
+        <div class="summary-row"><span>Sample supplier</span><span>Northstar Components</span></div>
+        <div class="summary-row"><span>Review tier</span><span>Tier 2 · enhanced</span></div>
+        <div class="summary-row"><span>Disposition</span><span>Authorized review after revisions</span></div>
+      </div>
+    </aside>
+  </div>
+</header>
+
+<main>
+  <section id="scenario">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="kicker">The scenario</div>
+        <h2>Procurement needs the whole picture before accepting a new deal</h2>
+        <p>A supplier submits a proposed supply agreement, order form, and updated product schedule. The agreement is deposited in a monitored OpenText Core Content Management workspace; that event starts an assessment orchestrated from OpenText Aviator Studio.</p>
+      </div>
+      <div class="scenario-grid">
+        <article class="card">
+          <span class="tag">BUYER CONTEXT</span>
+          <h3>Innovate Wholesale</h3>
+          <p>Innovate buys computer equipment and supplies for resale. Procurement wants to confirm that the commercial terms and product prices match approved expectations before routing the package.</p>
+          <ul>
+            <li>Review from Innovate’s perspective as the buyer</li>
+            <li>Consider spend, criticality, data or system access, and supply-chain dependency</li>
+            <li>Route issues to accountable reviewers; keep approval with people</li>
+          </ul>
+        </article>
+        <article class="card">
+          <span class="tag">AGENT ROLE</span>
+          <h3>Evidence-led decision support</h3>
+          <p>The agent assembles a clause-level checklist, highlights departures from buyer guidelines, validates item prices when reference data is present, and prepares an auditable review package.</p>
+          <ul>
+            <li>Quote or cite the contract section behind every finding</li>
+            <li>Call out missing exhibits, linked policies, and uncertain matches</li>
+            <li>Never approve, sign, or silently accept an exception</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="documents" class="alt">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="kicker">What Aviator reads</div>
+        <h2>Contract terms and reference material, reviewed together</h2>
+        <p>This illustrative package pairs the proposed terms with Innovate’s primary buyer-side standard and a vendor price reference. One referenced security schedule is not supplied, so the agent flags it instead of assuming what it says.</p>
+      </div>
+      <div class="doc-grid">
+        <article class="doc-card">
+          <h3>Proposed agreement &amp; order form</h3>
+          <p>Sample supplier terms establish the parties, order, payment, delivery, acceptance, renewal, and remedies to assess.</p>
+          <div class="fields"><span>Parties</span><span>Term</span><span>Acceptance</span><span>Renewal</span></div>
+        </article>
+        <article class="doc-card">
+          <h3>Product pricing appendix</h3>
+          <p>A sample item schedule gives the proposed contract price and any stated freight, surcharge, or other fee.</p>
+          <div class="fields"><span>Item codes</span><span>Unit prices</span><span>Fees</span><span>Effective date</span></div>
+        </article>
+        <article class="doc-card">
+          <h3>Guidelines &amp; price reference</h3>
+          <p>Vendor Contract Guidelines define preferred buyer positions; the Vendor Price List - Master supplies reference items and prices.</p>
+          <div class="fields"><span>Buyer standard</span><span>Reference price</span><span>Red flags</span><span>Review routing</span></div>
+        </article>
+      </div>
+      <div class="callout"><b>Completeness check:</b> the sample agreement refers to a Security Schedule that is absent from the package. The agent marks security obligations as unable to determine and asks the reviewer to obtain the missing document.</div>
+    </div>
+  </section>
+
+  <section id="assessment">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="kicker">Sample findings</div>
+        <h2>Show the term, its impact, and the next reviewer</h2>
+        <p>The sample clause language and item data below are fabricated for this demo. In a live review, findings must be grounded in the uploaded contract and cited to its exact sections.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Review area</th><th>Status</th><th>Sample evidence</th><th>Risk or impact</th><th>Suggested action · reviewer</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Price changes</strong></td><td><span class="chip red">Needs revision</span></td><td>§3.2 permits a supplier price change with 10 days’ notice.</td><td>Final costs can change after the order is placed.</td><td>Require fixed order pricing or an objective cap and advance approval. <strong>Procurement · Finance</strong></td></tr>
+            <tr><td><strong>Acceptance</strong></td><td><span class="chip yellow">Escalated</span></td><td>§4.1 deems goods accepted if not rejected within 3 days.</td><td>A short inspection window may limit practical rejection rights.</td><td>Extend inspection and define remedies for nonconforming goods. <strong>Procurement · Legal</strong></td></tr>
+            <tr><td><strong>Security terms</strong></td><td><span class="chip yellow">Unable to determine</span></td><td>§8 refers to an unattached Security Schedule.</td><td>Security duties, incident notice, and access controls cannot be verified.</td><td>Obtain and review the referenced schedule. <strong>Security · Legal</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="section-head" style="margin-top:42px;margin-bottom:20px;">
+        <div class="kicker">Price validation · fabricated demo data</div>
+        <h2 style="font-size:21px;">Match item codes before comparing prices</h2>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Item code</th><th>Product</th><th>Reference price</th><th>Contract price</th><th>Variance</th><th>Additional condition</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td class="mono">NC-1001</td><td>Network adapter · sample item</td><td>$42.00</td><td>$42.00</td><td>$0.00</td><td>None stated</td><td><span class="chip green">Matched</span></td></tr>
+            <tr><td class="mono">NC-1002</td><td>Managed switch · sample item</td><td>$180.00</td><td>$194.40</td><td>+$14.40 · 8%</td><td>Agreement also permits price changes on notice</td><td><span class="chip red">Review</span></td></tr>
+            <tr><td class="mono">NC-1099</td><td>Optical module · sample item</td><td>Not found</td><td>$76.00</td><td>Unable to calculate</td><td>Item code absent from reference list</td><td><span class="chip yellow">Unmatched</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout"><b>Price integrity:</b> reference price, contract price, stated variance, and extra fees are kept distinct. A difference is a question for Procurement—not evidence that a price is unauthorized or approved.</div>
+    </div>
+  </section>
+
+  <section class="alt" id="workflow">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="kicker">The investigation</div>
+        <h2>From document intake to a human review package</h2>
+        <p>The agent follows the agreement’s evidence, not assumptions. Review depth increases when spend, business criticality, data access, or operational dependency warrants it.</p>
+      </div>
+      <div class="timeline">
+        <div class="t-item"><span class="t-dot green"></span>
+          <details class="t-card"><summary><span class="date">01 · Intake</span><span class="title">Inventory the package and its governing documents</span><span class="arrow">›</span></summary>
+            <div class="body">Identify the agreement type, parties, dates, term, renewal, order of precedence, supplied exhibits, and referenced-but-missing materials. Do not treat a linked policy as reviewed if it was not provided.<span class="source">Agreement · Order form · Exhibits</span></div>
+          </details>
+        </div>
+        <div class="t-item"><span class="t-dot yellow"></span>
+          <details class="t-card"><summary><span class="date">02 · Triage</span><span class="title">Set review depth from relationship risk</span><span class="arrow">›</span></summary>
+            <div class="body">For this sample, proposed price changes, short acceptance timing, and a missing security schedule call for enhanced review. System access, personal data, critical services, or custom technology would trigger specialist review.<span class="source">Vendor Contract Guidelines</span></div>
+          </details>
+        </div>
+        <div class="t-item"><span class="t-dot red"></span>
+          <details class="t-card"><summary><span class="date">03 · Assess</span><span class="title">Compare clauses and prices; record exceptions separately</span><span class="arrow">›</span></summary>
+            <div class="body">Assess applicable domains against the buyer’s standard, cite the clause, explain practical impact, and propose a correction or review question. Match products by item code first; flag unmatched entries and unexplained differences.<span class="source">Agreement · Guidelines · Price List</span></div>
+          </details>
+        </div>
+        <div class="t-item"><span class="t-dot yellow"></span>
+          <details class="t-card"><summary><span class="date">04 · Route</span><span class="title">Deliver findings to authorized reviewers</span><span class="arrow">›</span></summary>
+            <div class="body">Route nonstandard legal terms to Legal and Procurement; unusual pricing to Finance and Procurement; and security matters to Security and the business owner. Keep exception rationale, compensating control, accountable owner, approver, and approval evidence on record.<span class="source">Human review required</span></div>
+          </details>
+        </div>
+      </div>
+      <div class="callout"><b>Exception record:</b> Sample §3.2 price-change right · risk: uncertain order cost · suggested control: fixed price or capped objective index with advance approval · reviewers: Procurement and Finance · approval evidence: not provided · status: pending review.</div>
+    </div>
+  </section>
+
+  <section id="ask">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="kicker">Ask Aviator</div>
+        <h2>Ask a question; get a traceable answer, not a decision</h2>
+        <p>These sample exchanges demonstrate how a reviewer can query the package and see the evidence behind each response.</p>
+      </div>
+      <div class="chat-shell">
+        <div class="chat-top"><span class="dot"></span>Content Aviator — illustrative contract review</div>
+        <div class="msg user"><div class="bubble">Can the supplier change the price after we place an order?</div></div>
+        <div class="msg bot">
+          <div class="bubble">In this illustrative agreement, §3.2 allows a price change with 10 days’ notice. That leaves the final order cost open to change. Consider fixing the accepted order price or defining an objective cap and requiring advance approval. Procurement and Finance should review; this is not an approval decision.</div>
+          <div class="cites"><span>Sample Agreement §3.2</span><span>Vendor Contract Guidelines</span></div>
+        </div>
+        <div class="msg user"><div class="bubble">Did the proposed schedule match the approved reference prices?</div></div>
+        <div class="msg bot">
+          <div class="bubble">The sample schedule’s NC-1001 price matches the reference. NC-1002 is 8% higher in the supplied demo data, and NC-1099 has no item-code match. I can’t determine whether either difference is authorized from these documents; route both to Procurement, with Finance reviewing the price impact.</div>
+          <div class="cites"><span>Sample Pricing Appendix</span><span>Vendor Price List - Master</span></div>
+        </div>
+        <div class="msg user"><div class="bubble">Are the vendor’s security obligations adequate?</div></div>
+        <div class="msg bot">
+          <div class="bubble">Unable to determine. The illustrative agreement refers to a Security Schedule that was not included in the package. Obtain it before assessing incident notice, access controls, data handling, or other security duties. Route to Security and Legal.</div>
+          <div class="cites"><span>Sample Agreement §8</span><span>Missing: Security Schedule</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="kicker">Why it matters</div>
+        <h2>What this demo is meant to show</h2>
+      </div>
+      <div class="cap-grid">
+        <div class="cap-card"><h3>Clause-level evidence</h3><p>Connect each finding to the precise agreement section, or state when evidence is missing.</p></div>
+        <div class="cap-card"><h3>Cross-document comparison</h3><p>Read the agreement against buyer guidelines and compare item codes to supplied reference pricing.</p></div>
+        <div class="cap-card"><h3>Explicit exceptions</h3><p>Keep the deviation, risk, suggested control, reviewer, and approval status visible and auditable.</p></div>
+        <div class="cap-card"><h3>Human accountability</h3><p>Prepare a review package and route issues; leave acceptance and approval to authorized people.</p></div>
+      </div>
+      <div class="callout"><b>Decision-support only:</b> Content Aviator does not provide legal advice, approve or execute agreements, or make final risk-acceptance decisions. Sample supplier, contract language, prices, and findings on this page are fictional and illustrative.</div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><strong>OpenText™ Content Aviator</strong> — vendor contract assessment demo.</div>
+    <div>All supplier details, terms, prices, and findings are illustrative.</div>
+  </div>
+</footer>
+
+</body>
+</html>
