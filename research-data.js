@@ -4,12 +4,12 @@ window.RESEARCH=[
   "slug": "agenticskills",
   "title": "Agentic Skills",
   "summary": "Learn about Agentic Skills and how Aviator will use them.",
-  "topic": "Aviator",
+  "topic": "Research",
   "tags": [
-   "Aviator"
+   "Aviator. Agentic"
   ],
-  "date": "",
-  "status": ""
+  "date": "October 20, 2026",
+  "status": "Published"
  },
  {
   "slug": "sample-research-note",
@@ -22,16 +22,5 @@ window.RESEARCH=[
   ],
   "date": "2026-10-18",
   "status": "Draft"
- },
- {
-  "slug": "welcome",
-  "title": "Welcome to the research library",
-  "summary": "What this library covers and how the notes are organized.",
-  "topic": "Overview",
-  "tags": [
-   "intro"
-  ],
-  "date": "2026-10-19",
-  "status": "Published"
  }
 ];
