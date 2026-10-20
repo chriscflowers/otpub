@@ -3,7 +3,7 @@ window.RESEARCH=[
  {
   "slug": "agenticskills",
   "title": "Agenticskills",
-  "summary": "",
+  "summary": "Learn about Agentic Skills and how Aviator will use them.",
   "topic": "General",
   "tags": [],
   "date": "",

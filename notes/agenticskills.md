@@ -1,6 +1,9 @@
 ---
 type: solution
+title: Agentic Skills
 summary: Learn about Agentic Skills and how Aviator will use them.
+topic: Aviator
+tags: [Aviator]
 ---
 
 ## Overview
