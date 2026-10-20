@@ -2,8 +2,10 @@
 type: solution
 title: Agentic Skills
 summary: Learn about Agentic Skills and how Aviator will use them.
-topic: Aviator
-tags: [Aviator]
+topic: Research
+tags: [Aviator. Agentic]
+date: October 20, 2026
+status: Published
 ---
 
 ## Overview
