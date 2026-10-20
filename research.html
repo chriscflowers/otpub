@@ -1,0 +1,45 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"><title>Research · OpenText Aviator</title></head><body>
+<div class="menubar"><div class="wrap">
+  <a class="brand" href="index.html"><span class="dot"></span><div>OpenText™ Aviator<small>Demos &amp; research</small></div></a>
+  <nav class="site-select" aria-label="Site">
+    <a href="index.html">Home</a>
+    <a href="research.html" class="active">Research</a>
+    <a href="aviator-microsite.html">Asset Condition Intelligence</a>
+  </nav>
+</div></div>
+<header class="hero compact"><div class="wrap">
+  <div class="eyebrow-line"><span class="rule"></span>Research library</div>
+  <h1>Curated research notes</h1>
+  <p class="sub">Search by keyword, or filter by topic.</p>
+</div></header>
+<main><section><div class="wrap">
+  <div class="toolbar">
+    <input class="search" id="q" type="search" placeholder="Search titles, summaries, tags" aria-label="Search research">
+    <div class="chips" id="chips" role="group" aria-label="Filter by topic"></div>
+    <div class="count" id="count" aria-live="polite"></div>
+  </div>
+  <div class="grid" id="list"></div>
+</div></section></main>
+<footer><div class="wrap"><div><strong>OpenText™ Aviator</strong> — demos and research</div><div>Demo scenarios are illustrative, built from sample document sets.</div></div></footer>
+<script src="research-data.js"></script><script src="site.js"></script>
+<script>
+var list=document.getElementById('list');
+try{
+const all=sorted(),topics=['All',...new Set(all.map(r=>r.topic||'General'))];
+let topic='All';
+const q=document.getElementById('q'),chips=document.getElementById('chips'),count=document.getElementById('count');
+chips.innerHTML=topics.map(t=>'<button class="chip" aria-pressed="'+(t==='All')+'" data-t="'+esc(t)+'">'+esc(t)+'</button>').join('');
+chips.onclick=e=>{const b=e.target.closest('.chip');if(!b)return;topic=b.dataset.t;chips.querySelectorAll('.chip').forEach(c=>c.setAttribute('aria-pressed',c===b));render()};
+q.oninput=render;
+function render(){
+  const s=q.value.trim().toLowerCase();
+  const r=all.filter(x=>(topic==='All'||(x.topic||'General')===topic)&&(!s||[x.title,x.summary,x.topic,(x.tags||[]).join(' ')].join(' ').toLowerCase().includes(s)));
+  list.innerHTML=r.map(card).join('')||'<p class="empty">No notes match. Clear the search or choose another topic.</p>';
+  count.textContent=r.length+' of '+all.length+' notes';
+}
+render();
+}catch(e){list.innerHTML='<p class="empty">The research list could not load. Make sure site.js and research-data.js are in the same folder as this page.</p>'}
+</script></body></html>

@@ -1,1 +1,44 @@
-
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"><title>OpenText Aviator · Demos &amp; Research</title></head><body>
+<div class="menubar"><div class="wrap">
+  <a class="brand" href="index.html"><span class="dot"></span><div>OpenText™ Aviator<small>Demos &amp; research</small></div></a>
+  <nav class="site-select" aria-label="Site">
+    <a href="index.html" class="active">Home</a>
+    <a href="research.html">Research</a>
+    <a href="aviator-microsite.html">Asset Condition Intelligence</a>
+  </nav>
+</div></div>
+<header class="hero"><div class="wrap">
+  <div class="eyebrow-line"><span class="rule"></span>Welcome</div>
+  <h1>Interactive demos and curated research, <span>in one place.</span></h1>
+  <p class="sub">Explore self-contained scenarios that show what OpenText™ Content Aviator can do with enterprise documents, or browse the research notes behind them.</p>
+</div></header>
+<main>
+<section><div class="wrap"><div class="paths">
+  <a class="path" href="#demos"><h3>Demo microsites</h3><p>Guided scenarios built from sample document sets.</p><div class="go">Browse demos →</div></a>
+  <a class="path" href="research.html"><h3>Research library</h3><p>Searchable notes, filtered by topic and tag.</p><div class="go">Browse research →</div></a>
+</div></div></section>
+<section id="demos"><div class="wrap">
+  <div class="section-head"><div class="kicker">Choose a scenario</div><h2>Demo microsites</h2><p>New scenarios appear here as they are built.</p></div>
+  <div class="grid">
+    <a class="card" href="aviator-microsite.html">
+      <div class="top"><div class="icon"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg></div><span class="status live">Live</span></div>
+      <h3>Asset Condition Intelligence</h3>
+      <p class="desc">Trace a turbine's condition history across seven years of inspection reports and maintenance records, and see Aviator catch a cross-facility documentation mix-up along the way.</p>
+      <div class="meta"><span>Power generation</span><span>19 documents</span><span>2 facilities</span></div>
+      <div class="go">Open microsite →</div>
+    </a>
+    <div class="card soon"><div class="top"><div class="icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><span class="status soon">Coming soon</span></div><h3>Next scenario</h3><p class="desc">A new microsite will appear here once it's built.</p><div class="go">Not yet available</div></div>
+  </div>
+</div></section>
+<section><div class="wrap">
+  <div class="section-head"><div class="kicker">Latest notes</div><h2>Recent research</h2><p>The newest additions to the library.</p></div>
+  <div class="grid" id="latest"></div>
+  <p style="margin-top:22px"><a class="go" href="research.html">View all research →</a></p>
+</div></section>
+</main>
+<footer><div class="wrap"><div><strong>OpenText™ Aviator</strong> — demos and research</div><div>Demo scenarios are illustrative, built from sample document sets.</div></div></footer>
+<script src="research-data.js"></script><script src="site.js"></script>
+<script>var L=document.getElementById("latest");try{L.innerHTML=sorted().slice(0,3).map(card).join("")||"<p class=empty>No research published yet.</p>"}catch(e){L.innerHTML="<p class=empty>The research list could not load. Make sure site.js and research-data.js are in the same folder as this page.</p>"}</script></body></html>

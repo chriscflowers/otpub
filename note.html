@@ -1,0 +1,33 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"><title>Note · OpenText Aviator</title></head><body>
+<div class="menubar"><div class="wrap">
+  <a class="brand" href="index.html"><span class="dot"></span><div>OpenText™ Aviator<small>Demos &amp; research</small></div></a>
+  <nav class="site-select" aria-label="Site">
+    <a href="index.html">Home</a>
+    <a href="research.html" class="active">Research</a>
+    <a href="aviator-microsite.html">Asset Condition Intelligence</a>
+  </nav>
+</div></div>
+<main><section><div class="wrap"><div class="page"><a class="back" href="research.html">← All research</a></div>
+<article class="prose" id="note"><p>Loading…</p></article></div></section></main>
+<footer><div class="wrap"><div><strong>OpenText™ Aviator</strong> — demos and research</div><div>Demo scenarios are illustrative, built from sample document sets.</div></div></footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js"></script>
+<script src="research-data.js"></script><script src="site.js"></script>
+<script>
+const el=document.getElementById('note');
+const slugify=s=>s.toLowerCase().trim().replace(/[^\w\s-]/g,'').replace(/\s+/g,'-');
+const n=(new URLSearchParams(location.search).get('n')||'').replace(/[^\w-]/g,'');
+const byTitle={};(window.RESEARCH||[]).forEach(r=>byTitle[r.title.toLowerCase()]=r.slug);
+fetch('notes/'+n+'.md').then(r=>{if(!r.ok)throw 0;return r.text()}).then(t=>{
+  t=t.replace(/^---\s*\n[\s\S]*?\n---\s*\n/,'');
+  t=t.replace(/!\[\[([^\]|]+)(?:\|[^\]]*)?\]\]/g,'![$1](notes/attachments/$1)');
+  t=t.replace(/\[\[([^\]|#]+)(?:#[^\]|]*)?(?:\|([^\]]+))?\]\]/g,(m,name,label)=>{
+    const slug=byTitle[name.trim().toLowerCase()]||slugify(name);
+    return '['+(label||name)+'](note.html?n='+slug+')'});
+  el.innerHTML=DOMPurify.sanitize(marked.parse(t));
+  const h=el.querySelector('h1');document.title=(h?h.textContent:n)+' · Research';
+}).catch(()=>{el.innerHTML='<h1>Note not found</h1><p>This note could not be loaded. If you opened this file directly from your computer, run a local server first (see the README). Otherwise return to the <a href="research.html">research library</a>.</p>'});
+</script></body></html>
